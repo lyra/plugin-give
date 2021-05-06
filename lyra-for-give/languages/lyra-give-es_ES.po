@@ -1,0 +1,427 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-04-07 13:42+0100\n"
+"PO-Revision-Date: 2021-04-07 13:44+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/admin/lyra-give-activation.php:49
+#, php-format
+msgid "%s Payment Gateway"
+msgstr "%s Portal De Pago"
+
+#: includes/admin/lyra-give-activation.php:70
+#, php-format
+msgid ""
+"<strong>Activation Error:</strong> You must have the <a href=\"https://"
+"givewp.com/\" target=\"_blank\">Give</a> plugin installed and activated for "
+"the %s add-on to activate."
+msgstr ""
+"<strong>Activation Error:</strong> You must have the <a href=\"https://"
+"givewp.com/\" target=\"_blank\">Give</a> plugin installed and activated for "
+"the %s add-on to activate."
+
+#: includes/admin/lyra-give-activation.php:88
+msgid "Settings"
+msgstr "Ajustes"
+
+#: includes/admin/lyra-give-admin.php:100
+msgid "MODULE INFORMATION"
+msgstr "INFORMACIÓN DEL MÓDULO"
+
+#: includes/admin/lyra-give-admin.php:105
+msgid "Developed by"
+msgstr "Desarrollado por"
+
+#: includes/admin/lyra-give-admin.php:111
+msgid "Contact us"
+msgstr "Contáctenos"
+
+#: includes/admin/lyra-give-admin.php:117
+msgid "Module version"
+msgstr "Versión del módulo"
+
+#: includes/admin/lyra-give-admin.php:123
+msgid "Gateway version"
+msgstr "Versión del portal"
+
+#: includes/admin/lyra-give-admin.php:129
+msgid "Click to view the module configuration documentation"
+msgstr "Haga clic para ver la documentación de la configuración del módulo"
+
+#: includes/admin/lyra-give-admin.php:137
+msgid "PAYMENT GATEWAY ACCESS"
+msgstr "ACCESO AL PORTAL DE PAGO"
+
+#: includes/admin/lyra-give-admin.php:142
+msgid "Shop ID"
+msgstr "Identificador de tienda"
+
+#: includes/admin/lyra-give-admin.php:143
+#, php-format
+msgid "The identifier provided by %s."
+msgstr "El identificador proporcionado por %s."
+
+#: includes/admin/lyra-give-admin.php:151
+msgid "Key in test mode"
+msgstr "Clave en modo test"
+
+#: includes/admin/lyra-give-admin.php:152
+#, php-format
+msgid "Key provided by %s for test mode (available in %s Back Office)."
+msgstr ""
+"Clave proporcionada por %s para modo test (disponible en el Back Office %s)."
+
+#: includes/admin/lyra-give-admin.php:158
+msgid "Key in production mode"
+msgstr "Clave en modo production"
+
+#: includes/admin/lyra-give-admin.php:159
+#, php-format
+msgid ""
+"Key provided by %s (available in %s Back Office after enabling production "
+"mode)."
+msgstr ""
+"Clave proporcionada por %s (disponible en el Back Office %s después de "
+"habilitar el modo production)."
+
+#: includes/admin/lyra-give-admin.php:166
+msgid "Mode"
+msgstr "Modo"
+
+#: includes/admin/lyra-give-admin.php:167
+msgid "The context mode of this module."
+msgstr "El modo de contexto de este módulo."
+
+#: includes/admin/lyra-give-admin.php:180
+msgid "Signature algorithm"
+msgstr "Algoritmo de firma"
+
+#: includes/admin/lyra-give-admin.php:181
+#, php-format
+msgid ""
+"Algorithm used to compute the payment form signature. Selected algorithm "
+"must be the same as one configured in the %s Back Office.<br /><b>The HMAC-"
+"SHA-256 algorithm should not be activated if it is not yet available in the "
+"%s Back Office, the feature will be available soon.</b>"
+msgstr ""
+"Algoritmo usado para calcular la firma del formulario de pago. El algoritmo "
+"seleccionado debe ser el mismo que el configurado en el Back Office %s.<br /"
+"><b>El algoritmo HMAC-SHA-256 no se debe activar si aún no está disponible "
+"el Back Office %s, la función estará disponible pronto.</b>"
+
+#: includes/admin/lyra-give-admin.php:187
+msgid "Instant Payment Notification URL"
+msgstr "URL de notificación de pago instantáneo"
+
+#: includes/admin/lyra-give-admin.php:188
+#, php-format
+msgid ""
+"<b style=\"color: red;\">URL to copy into your %s Back Office > Settings > "
+"Notification rules.<br />In multistore mode, notification URL is the same "
+"for all the stores.</b>"
+msgstr ""
+"<b style=\"color: red;\">URL a copiar en el Back Office %s > Configuración > "
+"Reglas de notificación.<br />En modo multitienda, la URL de notificación es "
+"la misma para todas las tiendas.</b>"
+
+#: includes/admin/lyra-give-admin.php:195
+msgid "Payment page URL"
+msgstr "URL de página de pago"
+
+#: includes/admin/lyra-give-admin.php:196
+msgid "Link to the payment page."
+msgstr "Enlace a la página de pago."
+
+#: includes/admin/lyra-give-admin.php:204
+msgid "PAYMENT PAGE"
+msgstr "PÁGINA DE PAGO"
+
+#: includes/admin/lyra-give-admin.php:210
+msgid "Default language"
+msgstr "Idioma por defecto"
+
+#: includes/admin/lyra-give-admin.php:211
+msgid "Default language on the payment page."
+msgstr "Idioma por defecto en la página de pago."
+
+#: includes/admin/lyra-give-admin.php:218
+msgid "Available languages"
+msgstr "Idiomas disponibles"
+
+#: includes/admin/lyra-give-admin.php:219
+msgid ""
+"Languages available on the payment page. If you do not select any, all the "
+"supported languages will be available."
+msgstr ""
+"Idiomas disponibles en la página de pago. Si no selecciona ninguno, todos "
+"los idiomas compatibles estarán disponibles."
+
+#: includes/admin/lyra-give-admin.php:225
+msgid "Capture delay"
+msgstr "Plazo de captura"
+
+#: includes/admin/lyra-give-admin.php:226
+#, php-format
+msgid ""
+"The number of days before the bank capture (adjustable in your %s Back "
+"Office)."
+msgstr ""
+"El número de días antes de la captura del pago (ajustable en su Back Office "
+"%s)."
+
+#: includes/admin/lyra-give-admin.php:232
+msgid "Validation mode"
+msgstr "Modo de validación"
+
+#: includes/admin/lyra-give-admin.php:233
+#, php-format
+msgid ""
+"If manual is selected, you will have to confirm payments manually in your %s "
+"Back Office."
+msgstr ""
+"Si se selecciona manual, deberá confirmar los pagos manualmente en su Back "
+"Office %s."
+
+#: includes/admin/lyra-give-admin.php:240
+msgid "Card types"
+msgstr "Tipos de tarjeta"
+
+#: includes/admin/lyra-give-admin.php:241
+msgid ""
+"The card type(s) that can be used for the payment. Select none to use "
+"gateway configuration."
+msgstr ""
+"El tipo(s) de tarjeta que se puede usar para el pago. No haga ninguna "
+"selección para usar la configuración del portal."
+
+#: includes/admin/lyra-give-admin.php:248
+msgid "CUSTOM 3DS"
+msgstr "3DS PERSONALIZADO"
+
+#: includes/admin/lyra-give-admin.php:253
+msgid "Manage 3DS"
+msgstr "Gestionar el 3DS"
+
+#: includes/admin/lyra-give-admin.php:254
+msgid ""
+"Amount below which customer could be exempt from strong authentication. "
+"Needs subscription to « Selective 3DS1 » or « Frictionless 3DS2 » options. "
+"For more information, refer to the module documentation."
+msgstr ""
+"Monto por debajo del cual el comprador podría estar exento de de la "
+"autenticación fuerte. Requiere suscripción a la opción « Selective 3DS1 » o "
+"a la opción « Frictionless 3DS2 ». Para más información, consulte la "
+"documentación del módulo."
+
+#: includes/admin/lyra-give-admin.php:261
+msgid "RETURN TO SHOP"
+msgstr "VOLVER A LA TIENDA"
+
+#: includes/admin/lyra-give-admin.php:266
+msgid "Automatic redirection"
+msgstr "Redirección automática"
+
+#: includes/admin/lyra-give-admin.php:267
+msgid ""
+"If enabled, the buyer is automatically redirected to your site at the end of "
+"the payment."
+msgstr ""
+"Si está habilitada, el comprador es redirigido automáticamente a su sitio al "
+"final del pago."
+
+#: includes/admin/lyra-give-admin.php:275
+msgid "Redirection timeout on success"
+msgstr "Tiempo de espera de la redirección en pago exitoso"
+
+#: includes/admin/lyra-give-admin.php:276
+msgid ""
+"Time in seconds (0-300) before the buyer is automatically redirected to your "
+"website after a successful payment."
+msgstr ""
+"Tiempo en segundos (0-300) antes de que el comprador sea redirigido "
+"automáticamente a su sitio web después de un pago exitoso."
+
+#: includes/admin/lyra-give-admin.php:282
+msgid "Redirection message on success"
+msgstr "Mensaje de redirección en pago exitoso"
+
+#: includes/admin/lyra-give-admin.php:283
+msgid ""
+"Message displayed on the payment page prior to redirection after a "
+"successful payment."
+msgstr ""
+"Mensaje mostrado en la página de pago antes de la redirección después de un "
+"pago exitoso."
+
+#: includes/admin/lyra-give-admin.php:284
+#: includes/admin/lyra-give-admin.php:298
+msgid "Redirection to shop in a few seconds..."
+msgstr "Redirección a la tienda en unos momentos..."
+
+#: includes/admin/lyra-give-admin.php:289
+msgid "Redirection timeout on failure"
+msgstr "Tiempo de espera de la redirección en pago rechazado"
+
+#: includes/admin/lyra-give-admin.php:290
+msgid ""
+"Time in seconds (0-300) before the buyer is automatically redirected to your "
+"website after a declined payment."
+msgstr ""
+"Tiempo en segundos (0-300) antes de que el comprador sea redirigido "
+"automáticamente a su sitio web después de un pago rechazado."
+
+#: includes/admin/lyra-give-admin.php:296
+msgid "Redirection message on failure"
+msgstr "Mensaje de redirección en pago rechazado"
+
+#: includes/admin/lyra-give-admin.php:297
+msgid ""
+"Message displayed on the payment page prior to redirection after a declined "
+"payment."
+msgstr ""
+"Mensaje mostrado en la página de pago antes de la redirección después de un "
+"pago rechazado."
+
+#: includes/admin/lyra-give-admin.php:303
+msgid "Return mode"
+msgstr "Modo de retorno"
+
+#: includes/admin/lyra-give-admin.php:304
+msgid ""
+"Method that will be used for transmitting the payment result from the "
+"payment page to your shop."
+msgstr ""
+"Método que se usará para transmitir el resultado del pago de la página de "
+"pago a su tienda."
+
+#: lib/LyraTools.php:62
+msgid "TEST"
+msgstr "TEST"
+
+#: lib/LyraTools.php:63
+msgid "PRODUCTION"
+msgstr "PRODUCTION"
+
+#: lib/LyraTools.php:67
+#, php-format
+msgid "%s Back Office configuration"
+msgstr "Configuración de Back Office %s"
+
+#: lib/LyraTools.php:68
+msgid "Automatic"
+msgstr "Automático"
+
+#: lib/LyraTools.php:69
+msgid "Manual"
+msgstr "Manual"
+
+#: lib/LyraTools.php:78
+msgid "Disable"
+msgstr "Deshabilitar"
+
+#: lib/LyraTools.php:79
+msgid "Enable"
+msgstr "Habilitar"
+
+#: lyra-give.php:89
+msgid "You will enter payment data after donation confirmation."
+msgstr ""
+"Usted ingresará los datos de pago después de la confirmación de donación."
+
+#: lyra-give.php:102
+msgid ""
+"<u>GOING INTO PRODUCTION</u><br >You want to know how to put your shop into "
+"production mode, read chapters « Proceeding to test phase » and « Shifting "
+"the shop to production mode » in the documentation of the module."
+msgstr ""
+"<u>IR A PRODUCTION</u><br >Si desea saber cómo poner su tienda en modo "
+"production, lea los capítulos « Proceder a la fase de prueba » y « Paso de "
+"una tienda al modo producción » en la documentación del módulo."
+
+#: lyra-give.php:107
+#, php-format
+msgid ""
+"The automatic validation has not worked. Have you correctly set up the "
+"notification URL in your %s Back Office?"
+msgstr ""
+"La validación automática no ha funcionado. ¿Configuró correctamente la URL "
+"de notificación en su Back Office %s?"
+
+#: lyra-give.php:109
+msgid ""
+"For understanding the problem, please read the documentation of the module : "
+"<br />&nbsp;&nbsp;&nbsp;- Chapter &laquo; To read carefully before going "
+"further &raquo;<br />&nbsp;&nbsp;&nbsp;- Chapter &laquo; Notification URL "
+"settings &raquo;"
+msgstr ""
+"Para entender el problema, lea la documentación del módulo: <br />&nbsp; "
+"&nbsp;&nbsp;- Capítulo &laquo; Leer detenidamente antes de continuar &raquo; "
+"<br />&nbsp;&nbsp;&nbsp;- Capítulo &laquo; Configuración de la URL de "
+"notificación &raquo;"
+
+#: lib/LyraTools.php:84
+msgid "German"
+msgstr "Alemán"
+
+#: lib/LyraTools.php:84
+msgid "Chinese"
+msgstr "Chino"
+
+#: lib/LyraTools.php:84
+msgid "Dutch"
+msgstr "Holandés"
+
+#: lib/LyraTools.php:84
+msgid "English"
+msgstr "Inglés"
+
+#: lib/LyraTools.php:84
+msgid "French"
+msgstr "Francés"
+
+#: lib/LyraTools.php:84
+msgid "Italian"
+msgstr "Italiano"
+
+#: lib/LyraTools.php:84
+msgid "Japanese"
+msgstr "Japonés"
+
+#: lib/LyraTools.php:84
+msgid "Polish"
+msgstr "Polaco"
+
+#: lib/LyraTools.php:84
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: lib/LyraTools.php:84
+msgid "Spanish"
+msgstr "Español"
+
+#: lib/LyraTools.php:84
+msgid "Swedish"
+msgstr "Sueco"
+
+#: lib/LyraTools.php:84
+msgid "Russian"
+msgstr "Ruso"
+
+#: lib/LyraTools.php:84
+msgid "Turkish"
+msgstr "Turco"
+
+#: lyra-give.php:13
+msgid "Accept donations with secured payment gateway."
+msgstr "Acepte donaciones con la pasarela de pago segura."
