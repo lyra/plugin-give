@@ -13,9 +13,10 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-require_once 'LyraApi.php';
+use Lyranetwork\Lyra\Sdk\Form\Api as LyraApi;
+use Lyranetwork\Lyra\Sdk\Form\Response as LyraResponse;
 
-class LyraTools
+class LyraGiveTools
 {
     private static $GATEWAY_CODE = 'Lyra';
     private static $GATEWAY_NAME = 'Lyra Collect';
@@ -30,7 +31,7 @@ class LyraTools
 
     private static $CMS_IDENTIFIER = 'GiveWP_2.x';
     private static $SUPPORT_EMAIL = 'support-ecommerce@lyra-collect.com';
-    private static $PLUGIN_VERSION = '1.0.0';
+    private static $PLUGIN_VERSION = '1.0.1';
     private static $GATEWAY_VERSION = 'V2';
 
     public static $plugin_features = array(
@@ -122,7 +123,7 @@ class LyraTools
                 $base_filename = basename($filename, '.pdf');
                 $lang = substr($base_filename, -2); // Extract language code.
 
-                $docs .= '<b><a href="' . LYRA_GIVE_URL . 'installation_doc/' . $base_filename . '.pdf" style="color: red; text-decoration: none;">' . $languages[$lang] . '</a></b>';
+                $docs .= '<b><a href="' . LYRA_GIVE_URL . 'installation_doc/' . $base_filename . '.pdf" style="color: red; text-decoration: none; margin-left: 10px;">' . $languages[$lang] . '</a></b>';
             }
         }
 
@@ -160,5 +161,15 @@ class LyraTools
         }
 
         return $status;
+    }
+
+    public static function getContrib()
+    {
+        // Effective used version.
+        include ABSPATH . WPINC . '/version.php';
+
+        $version = $wp_version . '_' . GIVE_VERSION;
+
+        return self::getDefault('CMS_IDENTIFIER') . '_' . self::getDefault('PLUGIN_VERSION') . '/' . $version . '/' . LyraApi::shortPhpVersion();
     }
 }

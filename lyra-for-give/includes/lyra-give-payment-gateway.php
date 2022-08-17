@@ -13,9 +13,13 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+use Lyranetwork\Lyra\Sdk\Form\Request as LyraRequest;
+use Lyranetwork\Lyra\Sdk\Form\Response as LyraResponse;
+use Lyranetwork\Lyra\Sdk\Form\Api as LyraApi;
+
 if (! class_exists('Lyra_Give_Gateway_Processor')) {
-    require_once LYRA_GIVE_DIR . '/lib/LyraTools.php';
-    require_once LYRA_GIVE_DIR . '/lib/LyraLogger.php';
+    require_once LYRA_GIVE_DIR . '/lib/LyraGiveTools.php';
+    require_once LYRA_GIVE_DIR . '/lib/LyraGiveLogger.php';
 
     /**
      * Handles payment gateway.
@@ -28,7 +32,7 @@ if (! class_exists('Lyra_Give_Gateway_Processor')) {
 
         public function __construct()
         {
-            $this->logger = LyraLogger::getLogger(__CLASS__);
+            $this->logger = LyraGiveLogger::getLogger(__CLASS__);
 
             add_action('give_gateway_lyra', array($this, 'lyra_give_process_payment')); // This action will run the function attached to it when it's time to process the donation submission.
             add_action('give_handle_lyra_response', array($this, 'lyra_give_payment_listener'));
@@ -93,7 +97,6 @@ if (! class_exists('Lyra_Give_Gateway_Processor')) {
             $give_settings = give_get_settings();
 
             // Use our custom class to generate the HTML.
-            require_once LYRA_GIVE_DIR . '/lib/LyraRequest.php';
             $lyra_request = new LyraRequest();
 
             $this->logger->info('Generating payment form for donation #' . $payment_id . '.');
@@ -135,13 +138,6 @@ if (! class_exists('Lyra_Give_Gateway_Processor')) {
                 $threeds_mpi = '2';
             }
 
-            // Effective used version.
-            include ABSPATH . WPINC . '/version.php';
-
-            $version = $wp_version . '_' . GIVE_VERSION;
-
-            $plugin_params = LyraTools::getDefault('CMS_IDENTIFIER') . '_' . LyraTools::getDefault('PLUGIN_VERSION') . '/' . $version . '/' . PHP_VERSION;
-
             $callback = home_url('?give-action=handle_lyra_response');
 
             // Other parameters.
@@ -149,7 +145,7 @@ if (! class_exists('Lyra_Give_Gateway_Processor')) {
                 // Donation info.
                 'amount'   => $total,
                 'order_id' => $payment_id,
-                'contrib'  => $plugin_params,
+                'contrib'  => LyraGiveTools::getContrib(),
 
                 // Misc data.
                 'currency'    => $lyra_currency->getNum(),
@@ -179,8 +175,6 @@ if (! class_exists('Lyra_Give_Gateway_Processor')) {
          */
         public function lyra_give_payment_listener()
         {
-            require_once LYRA_GIVE_DIR . '/lib/LyraResponse.php';
-
             $from_server = isset($_POST['vads_hash']) && ! empty($_POST['vads_hash']);
 
             $params = (array) stripslashes_deep($_REQUEST);
@@ -246,14 +240,14 @@ if (! class_exists('Lyra_Give_Gateway_Processor')) {
             }
 
             // Add prodfaq domain feature to show going to production messages.
-            Give()->session->set('lyra_going_into_prod', (! $from_server && (give_get_option('lyra_ctx_mode') === 'TEST') && LyraTools::$plugin_features['prodfaq']));
+            Give_Cache::set('give_cache_lyra_going_into_prod', (! $from_server && (give_get_option('lyra_ctx_mode') === 'TEST') && LyraGiveTools::$plugin_features['prodfaq']));
 
             // Process according to donation status and payment result.
             if (! empty($give_donation)) {
                 if ($give_donation->post_status === 'pending') {
                     //Donation not processed yet.
                     $this->logger->info("First payment notification. Let's change donation status.");
-                    $new_donation_status = LyraTools::getNewDonationStatus($lyraResponse);
+                    $new_donation_status = LyraGiveTools::getNewDonationStatus($lyraResponse);
                     give_update_payment_status($donationId, $new_donation_status);
 
                     if ($lyraResponse->isAcceptedPayment()) { // Update post_status = publish.
@@ -264,7 +258,7 @@ if (! class_exists('Lyra_Give_Gateway_Processor')) {
                             give_die($lyraResponse->getOutputForGateway('payment_ok'));
                         } else {
                             if (give_get_option('lyra_ctx_mode') === 'TEST') {
-                                Give()->session->set('lyra_check_url_warn', 'true');
+                                Give_Cache::set('give_cache_lyra_check_url_warn', 'true');
                             }
 
                             $this->logger->info('RETURN URL PROCESS END.');
@@ -295,7 +289,7 @@ if (! class_exists('Lyra_Give_Gateway_Processor')) {
                     // Donation already processed.
                     $this->logger->info("Donation #$donationId is already saved.");
 
-                    $expected_donation_status = LyraTools::getNewDonationStatus($lyraResponse);
+                    $expected_donation_status = LyraGiveTools::getNewDonationStatus($lyraResponse);
                     if ($expected_donation_status !== $give_donation->post_status) {
                         $this->logger->error("Error! Invalid payment result received for already saved donation #$donationId. Payment result: " . $lyraResponse->getTransStatus() . ", Donation status: $give_donation->post_status.");
 

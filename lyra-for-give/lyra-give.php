@@ -12,10 +12,13 @@
  * Plugin Name: Lyra Collect for GiveWP
  * Description: Accept donations with secured payment gateway.
  * Author: Lyra Network
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author URI: https://www.lyra.com
+ * License: GPLv3 or later
  * Requires at least: 4.8
- * Tested up to: 5.7
+ * Tested up to: 6.0
+ * GiveWP requires at least: 2.0
+ * GiveWP tested up to: 2.21
  * Text Domain: lyra-give
  * Domain Path: /languages
  */
@@ -44,6 +47,8 @@ if (! defined('LYRA_GIVE_DIR')) {
 if (! defined( 'LYRA_GIVE_URL')) {
     define('LYRA_GIVE_URL', plugin_dir_url(LYRA_GIVE_FILE));
 }
+
+include_once LYRA_GIVE_DIR . 'lib/lyra-give-sdk-autoload.php';
 
 include(LYRA_GIVE_DIR . '/includes/admin/lyra-give-activation.php');
 include(LYRA_GIVE_DIR . '/includes/admin/lyra-give-admin.php');
@@ -98,18 +103,18 @@ function lyra_give_receipt()
 {
     require_once GIVE_PLUGIN_DIR . '/includes/class-notices.php';
 
-    if (Give()->session->get('lyra_going_into_prod')) {
+    if (Give_Cache::get('give_cache_lyra_going_into_prod')) {
         Give_Notices::print_frontend_notice(sprintf(__('<u>GOING INTO PRODUCTION</u><br >You want to know how to put your shop into production mode, read chapters « Proceeding to test phase » and « Shifting the shop to production mode » in the documentation of the module.', 'lyra-give')), true, 'warning');
-        Give()->session->set('lyra_going_into_prod', false);
+        Give_Cache::delete('give_cache_payzen_going_into_prod');
     }
 
-    if (Give()->session->get('lyra_check_url_warn')) {
-        $ipn_url_warn = sprintf(__('The automatic validation has not worked. Have you correctly set up the notification URL in your %s Back Office?', 'lyra-give'), 'Lyra Expert');
+    if (Give_Cache::get('give_cache_lyra_check_url_warn')) {
+        $ipn_url_warn = sprintf(__('The automatic validation has not worked. Have you correctly set up the notification URL in your %s Back Office?', 'lyra-give'), 'Lyra');
         $ipn_url_warn .= '<br />';
         $ipn_url_warn .= __('For understanding the problem, please read the documentation of the module : <br />&nbsp;&nbsp;&nbsp;- Chapter &laquo; To read carefully before going further &raquo;<br />&nbsp;&nbsp;&nbsp;- Chapter &laquo; Notification URL settings &raquo;', 'lyra-give');
 
         Give_Notices::print_frontend_notice($ipn_url_warn, true, 'error');
-        Give()->session->set('lyra_check_url_warn', false);
+        Give_Cache::delete('give_cache_lyra_check_url_warn');
     }
 
     echo '<br />';
