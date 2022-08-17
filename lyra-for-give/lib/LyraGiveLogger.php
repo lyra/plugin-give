@@ -13,7 +13,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-class LyraLogger
+class LyraGiveLogger
 {
     const DEBUG = 1;
     const INFO = 2;
@@ -49,7 +49,7 @@ class LyraLogger
     public static function getLogger($name)
     {
         if (is_null(self::$logger)) {
-            self::$logger = new LyraLogger();
+            self::$logger = new LyraGiveLogger();
         }
 
         self::$logger->name = $name;
