@@ -13,6 +13,8 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+use Lyranetwork\Lyra\Sdk\Form\Api as LyraApi;
+
 /**
  * Proceed only, if class Lyra_Give_Admin_Settings not exists.
  */
@@ -88,7 +90,7 @@ if (! class_exists('Lyra_Give_Admin_Settings')) {
          */
         function register_settings($settings)
         {
-            require_once LYRA_GIVE_DIR . '/lib/LyraTools.php';
+            require_once LYRA_GIVE_DIR . '/lib/LyraGiveTools.php';
 
             switch (give_get_current_setting_section()) {
                 case 'lyra':
@@ -109,25 +111,25 @@ if (! class_exists('Lyra_Give_Admin_Settings')) {
                             'id'      => 'lyra_contact_email',
                             'type'    => 'lyra_label',
                             'name'    => __('Contact us', 'lyra-give'),
-                            'default' => '<a href="mailto:' . LyraTools::getDefault('SUPPORT_EMAIL') . '"style="text-decoration: none; color: #0073aa;">' . LyraTools::getDefault('SUPPORT_EMAIL') . '</a>'
+                            'default' => '<b>' . LyraApi::formatSupportEmails(LyraGiveTools::getDefault('SUPPORT_EMAIL')) . '</b>'
                         ),
                         array(
                             'id'      => 'lyra_module_version',
                             'type'    => 'lyra_label',
                             'name'    => __('Module version', 'lyra-give'),
-                            'default' => LyraTools::getDefault('PLUGIN_VERSION')
+                            'default' => LyraGiveTools::getDefault('PLUGIN_VERSION')
                         ),
                         array(
                             'id'      => 'lyra_gateway_version',
                             'type'    => 'lyra_label',
                             'name'    => __('Gateway version', 'lyra-give'),
-                            'default' => LyraTools::getDefault('GATEWAY_VERSION')
+                            'default' => LyraGiveTools::getDefault('GATEWAY_VERSION')
                         ),
                         array(
                             'id'      => 'lyra_doc_link',
                             'type'    => 'lyra_label',
-                            'name'    => LyraTools::getDocsLinks() !== "" ? __('Click to view the module configuration documentation', 'lyra-give') : "",
-                            'default' => LyraTools::getDocsLinks()
+                            'name'    => LyraGiveTools::getDocsLinks() !== "" ? __('Click to view the module configuration documentation', 'lyra-give') : "",
+                            'default' => LyraGiveTools::getDocsLinks()
                         ),
 
                         // Admin interface: platform access settings.
@@ -141,45 +143,45 @@ if (! class_exists('Lyra_Give_Admin_Settings')) {
                             'type'    => 'text',
                             'name'    => __('Shop ID', 'lyra-give'),
                             'desc'    => sprintf(__('The identifier provided by %s.', 'lyra-give'), 'Lyra Collect'),
-                            'default' => LyraTools::getDefault('SITE_ID')
+                            'default' => LyraGiveTools::getDefault('SITE_ID')
                         ),
 
-                        ! LyraTools::$plugin_features['qualif'] ?
+                        ! LyraGiveTools::$plugin_features['qualif'] ?
                         array(
                             'id'      => 'lyra_key_test',
                             'type'    => 'text',
                             'name'    => __('Key in test mode', 'lyra-give'),
                             'desc'    => sprintf(__('Key provided by %s for test mode (available in %s Back Office).', 'lyra-give'), 'Lyra Collect', 'Lyra Expert'),
-                            'default' => LyraTools::getDefault('KEY_TEST')
+                            'default' => LyraGiveTools::getDefault('KEY_TEST')
                         ) : array(),
                         array(
                             'id'      => 'lyra_key_prod',
                             'type'    => 'text',
                             'name'    => __('Key in production mode', 'lyra-give'),
                             'desc'    => sprintf(__('Key provided by %s (available in %s Back Office after enabling production mode).', 'lyra-give'), 'Lyra Collect', 'Lyra Expert'),
-                            'default' => LyraTools::getDefault('KEY_PROD')
+                            'default' => LyraGiveTools::getDefault('KEY_PROD')
                         ),
                         array(
-                            'id'         => LyraTools::$plugin_features['qualif'] ? 'lyra_context_mode' : 'lyra_ctx_mode',
+                            'id'         => LyraGiveTools::$plugin_features['qualif'] ? 'lyra_context_mode' : 'lyra_ctx_mode',
                             'type'       => 'select',
-                            'options'    => LyraTools::getDropdownList('lyra_cmodes'),
+                            'options'    => LyraGiveTools::getDropdownList('lyra_cmodes'),
                             'name'       => __('Mode', 'lyra-give'),
                             'desc'       => __('The context mode of this module.', 'lyra-give'),
-                            'default'    => LyraTools::getDefault('CTX_MODE'),
-                            'attributes' => LyraTools::$plugin_features['qualif'] ? array('disabled' => 'true'): array()
+                            'default'    => LyraGiveTools::getDefault('CTX_MODE'),
+                            'attributes' => LyraGiveTools::$plugin_features['qualif'] ? array('disabled' => 'true'): array()
                         ),
-                        LyraTools::$plugin_features['qualif'] ? array(
+                        LyraGiveTools::$plugin_features['qualif'] ? array(
                             'id'      => 'lyra_ctx_mode',
                             'type'    => 'hidden',
-                            'default' => LyraTools::getDefault('CTX_MODE')
+                            'default' => LyraGiveTools::getDefault('CTX_MODE')
                         ) : array(),
                         array(
                             'id'      => 'lyra_sign_algo',
                             'type'    => 'select',
-                            'options' => LyraTools::getDropdownList('lyra_salgos'),
+                            'options' => LyraGiveTools::getDropdownList('lyra_salgos'),
                             'name'    => __('Signature algorithm', 'lyra-give'),
-                            'desc'    => LyraTools::$plugin_features['shatwo'] ? preg_replace('#<br /><b>[^<>]+</b>#', '', sprintf(__('Algorithm used to compute the payment form signature. Selected algorithm must be the same as one configured in the %s Back Office.<br /><b>The HMAC-SHA-256 algorithm should not be activated if it is not yet available in the %s Back Office, the feature will be available soon.</b>', 'lyra-give'), 'Lyra Expert', 'Lyra Expert') ) : sprintf(__('Algorithm used to compute the payment form signature. Selected algorithm must be the same as one configured in the %s Back Office.<br /><b>The HMAC-SHA-256 algorithm should not be activated if it is not yet available in the %s Back Office, the feature will be available soon.</b>', 'lyra-give'), 'Lyra Expert', 'Lyra Expert'),
-                            'default' => LyraTools::getDefault('SIGN_ALGO')
+                            'desc'    => LyraGiveTools::$plugin_features['shatwo'] ? preg_replace('#<br /><b>[^<>]+</b>#', '', sprintf(__('Algorithm used to compute the payment form signature. Selected algorithm must be the same as one configured in the %s Back Office.<br /><b>The HMAC-SHA-256 algorithm should not be activated if it is not yet available in the %s Back Office, the feature will be available soon.</b>', 'lyra-give'), 'Lyra Expert', 'Lyra Expert') ) : sprintf(__('Algorithm used to compute the payment form signature. Selected algorithm must be the same as one configured in the %s Back Office.<br /><b>The HMAC-SHA-256 algorithm should not be activated if it is not yet available in the %s Back Office, the feature will be available soon.</b>', 'lyra-give'), 'Lyra Expert', 'Lyra Expert'),
+                            'default' => LyraGiveTools::getDefault('SIGN_ALGO')
                         ),
                         array(
                             'id'         => 'lyra_check_url',
@@ -194,7 +196,7 @@ if (! class_exists('Lyra_Give_Admin_Settings')) {
                             'type'    => 'text',
                             'name'    => __('Payment page URL', 'lyra-give'),
                             'desc'    => __('Link to the payment page.', 'lyra-give'),
-                            'default' => LyraTools::getDefault('GATEWAY_URL')
+                            'default' => LyraGiveTools::getDefault('GATEWAY_URL')
                         ),
 
                         // Admin interface: payment page settings.
@@ -206,15 +208,15 @@ if (! class_exists('Lyra_Give_Admin_Settings')) {
                         array(
                             'id'      => 'lyra_default_language',
                             'type'    => 'select',
-                            'options' => LyraTools::getDropdownList('lyra_languages'),
+                            'options' => LyraGiveTools::getDropdownList('lyra_languages'),
                             'name'    => __('Default language', 'lyra-give'),
                             'desc'    => __('Default language on the payment page.', 'lyra-give'),
-                            'default' => LyraTools::getDefault('LANGUAGE')
+                            'default' => LyraGiveTools::getDefault('LANGUAGE')
                         ),
                         array(
                             'id'      => 'lyra_available_languages',
                             'type'    => 'multiselect',
-                            'options' => LyraTools::getDropdownList('lyra_languages'),
+                            'options' => LyraGiveTools::getDropdownList('lyra_languages'),
                             'name'    => __('Available languages', 'lyra-give'),
                             'desc'    => __('Languages available on the payment page. If you do not select any, all the supported languages will be available.', 'lyra-give'),
                             'default' => array()
@@ -228,7 +230,7 @@ if (! class_exists('Lyra_Give_Admin_Settings')) {
                         array(
                             'id'      => 'lyra_validation_mode',
                             'type'    => 'select',
-                            'options' => LyraTools::getDropdownList('lyra_vmodes'),
+                            'options' => LyraGiveTools::getDropdownList('lyra_vmodes'),
                             'name'    => __('Validation mode', 'lyra-give'),
                             'desc'    => sprintf(__('If manual is selected, you will have to confirm payments manually in your %s Back Office.', 'lyra-give'),'Lyra Expert'),
                             'default' => ''
@@ -236,7 +238,7 @@ if (! class_exists('Lyra_Give_Admin_Settings')) {
                         array(
                             'id'      => 'lyra_payment_cards',
                             'type'    => 'multiselect',
-                            'options' => LyraTools::getDropdownList('lyra_cards'),
+                            'options' => LyraGiveTools::getDropdownList('lyra_cards'),
                             'name'    => __('Card types', 'lyra-give'),
                             'desc'    => __('The card type(s) that can be used for the payment. Select none to use gateway configuration.', 'lyra-give')
                         ),
@@ -267,7 +269,7 @@ if (! class_exists('Lyra_Give_Admin_Settings')) {
                             'desc'        => __('If enabled, the buyer is automatically redirected to your site at the end of the payment.', 'lyra-give'),
                             'row_classes' => 'give-subfield give-hidden',
                             'default'     => '0',
-                            'options'     => LyraTools::getDropdownList('lyra_redirects')
+                            'options'     => LyraGiveTools::getDropdownList('lyra_redirects')
                         ),
                         array(
                             'id'      => 'lyra_redirect_success_timeout',
@@ -302,7 +304,7 @@ if (! class_exists('Lyra_Give_Admin_Settings')) {
                             'type'    => 'select',
                             'name'    => __('Return mode', 'lyra-give'),
                             'desc'    => __('Method that will be used for transmitting the payment result from the payment page to your shop.', 'lyra-give'),
-                            'options' => LyraTools::getDropdownList('lyra_rmodes'),
+                            'options' => LyraGiveTools::getDropdownList('lyra_rmodes'),
                             'default' => 'GET'
                         ),
                         array(
